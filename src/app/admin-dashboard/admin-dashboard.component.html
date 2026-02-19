@@ -1,0 +1,49 @@
+<div class="container mt-5 mb-5">
+  <h2 class="text-center mb-4">Supplier Management Panel</h2>
+  
+  <div *ngIf="error" class="alert alert-danger mb-3">
+    {{ error }}
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table table-hover table-borderless">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Company Name</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Wood Types</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let supplier of pendingSuppliers">
+          <td>{{ supplier.name }}</td>
+          <td>{{ supplier.address }}</td>
+          <td>{{ supplier.phone || '-' }}</td>
+          <td>
+            <div class="d-flex flex-wrap gap-1">
+              <span *ngFor="let type of supplier.types" class="badge bg-light text-dark">
+                {{ type }}
+              </span>
+            </div>
+          </td>
+          <td>{{ supplier.price }} €/m³</td>
+          <td>
+            <button 
+              class="btn btn-success btn-sm me-2" 
+              (click)="approve(supplier)">
+              <i class="bi bi-check"></i> Approve
+            </button>
+            <button 
+              class="btn btn-danger btn-sm" 
+              (click)="reject(supplier)">
+              <i class="bi bi-x"></i> Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
